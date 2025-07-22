@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- GANTI DENGAN URL WEB APP DARI DEPLOYMENT TERAKHIR ANDA ---
-    const SCRIPT_URL = 'https://nobodysandj.github.io/KolonelStore/'; 
+    // --- GANTI DENGAN URL WEB APP GOOGLE SCRIPT ANDA YANG BENAR ---
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwZp1EuMRgPKXIToxvY5CaRAKa9jSc1t3A7s8sIAZS0UGE-Ak-hx7A57whhBGuMYRl4Uw/exec'; 
     // -----------------------------------------------------------
 
     // === ELEMEN DOM ===
@@ -34,6 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // === FUNGSI-FUNGSI ===
     
     const loadProducts = async () => {
+        if (!SCRIPT_URL || SCRIPT_URL === 'MASUKKAN_URL_APPS_SCRIPT_ANDA_DI_SINI') {
+            productListContainer.innerHTML = '<p class="text-center col-span-full text-yellow-400">PENTING: URL Google Apps Script belum dimasukkan di file script.js.</p>';
+            return;
+        }
         productListContainer.innerHTML = ''; 
         productListContainer.appendChild(loader);
         try {
@@ -225,30 +229,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // INISIALISASI
-    loadProducts(); 
-    updateCart();
-
-    // =======================================================
-    // KODE UNTUK LOGIN TERSEMBUNYI (YANG LUPA DITAMBAHKAN)
-    // =======================================================
-    const logoElement = document.querySelector('header a[href="#"]');
+    // Login Tersembunyi
+    const logoElement = document.querySelector('header a');
     let clickCount = 0;
     let clickTimer = null;
-
-    if (logoElement) {
+    if(logoElement) {
         logoElement.addEventListener('click', (e) => {
             e.preventDefault(); 
             clickCount++;
-            
             if (clickTimer) clearTimeout(clickTimer);
-            clickTimer = setTimeout(() => {
-                clickCount = 0;
-            }, 1000); // Reset dalam 1 detik
-
+            clickTimer = setTimeout(() => { clickCount = 0; }, 1000);
             if (clickCount === 5) {
                 window.location.href = 'admin.html';
             }
         });
     }
+
+    // INISIALISASI
+    loadProducts(); 
+    updateCart();
 });
