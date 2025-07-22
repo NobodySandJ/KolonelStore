@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- GANTI DENGAN URL WEB APP DARI DEPLOYMENT TERAKHIR ANDA ---
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwZp1EuMRgPKXIToxvY5CaRAKa9jSc1t3A7s8sIAZS0UGE-Ak-hx7A57whhBGuMYRl4Uw/exec'; 
+    const SCRIPT_URL = 'https://nobodysandj.github.io/KolonelStore/'; 
     // -----------------------------------------------------------
 
     // === ELEMEN DOM ===
@@ -221,11 +221,34 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         if (target.classList.contains('remove-item')) {
-            updateCartQuantity(id, 0); // Hapus item dengan set quantity jadi 0
+            updateCartQuantity(id, 0);
         }
     });
 
     // INISIALISASI
     loadProducts(); 
     updateCart();
+
+    // =======================================================
+    // KODE UNTUK LOGIN TERSEMBUNYI (YANG LUPA DITAMBAHKAN)
+    // =======================================================
+    const logoElement = document.querySelector('header a[href="#"]');
+    let clickCount = 0;
+    let clickTimer = null;
+
+    if (logoElement) {
+        logoElement.addEventListener('click', (e) => {
+            e.preventDefault(); 
+            clickCount++;
+            
+            if (clickTimer) clearTimeout(clickTimer);
+            clickTimer = setTimeout(() => {
+                clickCount = 0;
+            }, 1000); // Reset dalam 1 detik
+
+            if (clickCount === 5) {
+                window.location.href = 'admin.html';
+            }
+        });
+    }
 });
