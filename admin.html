@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Toko Sederhana</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+        input[type=number] { -moz-appearance: textfield; appearance: none; }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div id="login-section" class="flex items-center justify-center min-h-screen">
+        <div class="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
+            <h2 class="text-2xl font-bold text-center text-gray-800">Admin Login</h2>
+            <form id="login-form" class="space-y-6">
+                <div>
+                    <label for="username" class="text-sm font-medium text-gray-700">Username</label>
+                    <input type="text" id="username" name="username" required class="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                <div>
+                    <label for="password" class="text-sm font-medium text-gray-700">Password</label>
+                    <input type="password" id="password" name="password" required class="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                <div>
+                    <button type="submit" class="w-full px-4 py-2 font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Login
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="admin-dashboard" class="hidden p-4 md:p-8">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold text-gray-800">Admin Dashboard</h1>
+            <button id="logout-btn" class="px-4 py-2 font-medium text-white bg-red-600 rounded-md hover:bg-red-700">Logout</button>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-700">Manajemen Produk</h2>
+            <form id="add-product-form" class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
+                <input type="text" id="product-name" placeholder="Nama Barang" required class="md:col-span-2 px-3 py-2 border rounded">
+                <input type="number" id="product-price" placeholder="Harga" required class="px-3 py-2 border rounded">
+                <input type="number" id="product-stock" placeholder="Stok" required class="px-3 py-2 border rounded">
+                <input type="text" id="product-image" placeholder="URL Gambar" required class="md:col-span-2 px-3 py-2 border rounded">
+                <button type="submit" class="md:col-span-5 w-full px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700">Tambah Produk</button>
+            </form>
+            
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white">
+                    <thead class="bg-gray-200">
+                        <tr>
+                            <th class="px-4 py-2 text-left">Gambar</th>
+                            <th class="px-4 py-2 text-left">Nama Barang</th>
+                            <th class="px-4 py-2 text-left">Harga</th>
+                            <th class="px-4 py-2 text-left">Stok</th>
+                            <th class="px-4 py-2 text-center">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="products-table-body">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-700">Pesanan Masuk</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white">
+                    <thead class="bg-gray-200">
+                        <tr>
+                            <th class="px-4 py-2 text-left">Tanggal</th>
+                            <th class="px-4 py-2 text-left">Info Pembeli</th>
+                            <th class="px-4 py-2 text-left">Barang Dibeli</th>
+                            <th class="px-4 py-2 text-left">Total</th>
+                            <th class="px-4 py-2 text-left">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orders-table-body">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="loader" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
+        <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-white"></div>
+    </div>
+
+
+    <script src="admin.js"></script>
+</body>
+</html>
